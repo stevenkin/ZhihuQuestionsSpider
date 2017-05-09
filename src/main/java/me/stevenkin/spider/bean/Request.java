@@ -44,4 +44,13 @@ public class Request {
         this.parames.put(key,value);
         return this;
     }
+
+    @Override
+    public String toString() {
+        return "Request{" +
+                "url='" + url + '\'' +
+                ", method=" + method +
+                ", parames=" + parames +
+                '}';
+    }
 }
