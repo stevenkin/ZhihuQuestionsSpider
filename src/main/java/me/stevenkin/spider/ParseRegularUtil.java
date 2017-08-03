@@ -1,5 +1,7 @@
 package me.stevenkin.spider;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import me.stevenkin.spider.bean.HttpMethod;
 import me.stevenkin.spider.bean.Page;
@@ -29,6 +31,16 @@ public class ParseRegularUtil {
             request.addParame("method","next")
                     .addParame("params",object.toJSONString());
             result.addRequest(request);
+        }
+    }
+
+    public static void parseZhihuTopics1(Page page, Result result){
+        String json = page.getContent();
+        JSONObject object = JSON.parseObject(json);
+        JSONArray array = object.getJSONArray("msg");
+        for(int i=0;i<array.size();i++){
+            System.out.println(array.get(i));
+            String topicStr = array.getString(i);
         }
     }
 }
