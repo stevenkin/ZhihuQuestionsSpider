@@ -47,7 +47,7 @@ public class Spider implements Runnable {
 
     @Override
     public void run() {
-        //while(true) {
+        while(true) {
             try {
                 Request request = requests.take();
                 Page page = downloader.download(request);
@@ -67,7 +67,7 @@ public class Spider implements Runnable {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        //}
+        }
     }
 
     public Spider start(Request request) throws InterruptedException {

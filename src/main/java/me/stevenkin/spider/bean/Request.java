@@ -10,6 +10,7 @@ public class Request {
     private String url;
     private HttpMethod method;
     private Map<String,String> parames = new HashMap<>();
+    private Map<String,Object> attach = new HashMap<>();
 
     public Request(String url, HttpMethod method){
         this.method = method==null?HttpMethod.GET:method;
@@ -43,6 +44,15 @@ public class Request {
     public Request addParame(String key, String value){
         this.parames.put(key,value);
         return this;
+    }
+
+    public Request addAttach(String key,Object value){
+        this.attach.put(key,value);
+        return this;
+    }
+
+    public Object getAddch(String key){
+        return this.attach.get(key);
     }
 
     @Override
