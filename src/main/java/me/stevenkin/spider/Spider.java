@@ -1,9 +1,5 @@
 package me.stevenkin.spider;
 
-import me.stevenkin.spider.bean.Page;
-import me.stevenkin.spider.bean.Request;
-import me.stevenkin.spider.bean.Result;
-
 import java.util.List;
 import java.util.concurrent.*;
 

@@ -1,4 +1,6 @@
-package me.stevenkin.spider.bean;
+package me.stevenkin.spider;
+
+import me.stevenkin.spider.Request;
 
 /**
  * Created by wjg on 2017/4/20.

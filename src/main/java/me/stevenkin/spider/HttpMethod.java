@@ -1,4 +1,4 @@
-package me.stevenkin.spider.bean;
+package me.stevenkin.spider;
 
 /**
  * Created by wjg on 2017/4/22.

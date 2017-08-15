@@ -1,8 +1,5 @@
 package me.stevenkin.spider;
 
-import me.stevenkin.spider.bean.HttpMethod;
-import me.stevenkin.spider.bean.Request;
-import me.stevenkin.spider.bean.Page;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
