@@ -44,4 +44,13 @@ public class Result {
     public Object getData(String key){
         return this.result.get(key);
     }
+
+    @Override
+    public String toString() {
+        return "Result{" +
+                "requests=" + requests +
+                ", result=" + result +
+                ", isSkip=" + isSkip +
+                '}';
+    }
 }

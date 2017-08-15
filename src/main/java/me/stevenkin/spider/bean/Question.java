@@ -1,17 +1,17 @@
 package me.stevenkin.spider.bean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by wjg on 2017/8/13.
  */
-public class Questiion {
+public class Question {
     private String questionName;
     private String questionUrl;
-    private List<TopicLink> topicLinks;
+    private List<TopicLink> topicLinks = new ArrayList<>();
     private Integer followers;
     private Integer browseNum;
-    private Integer commentNum;
 
     public String getQuestionName() {
         return questionName;
@@ -37,6 +37,11 @@ public class Questiion {
         this.topicLinks = topicLinks;
     }
 
+    public Question addTopicLink(TopicLink link){
+        this.topicLinks.add(link);
+        return this;
+    }
+
     public Integer getFollowers() {
         return followers;
     }
@@ -51,13 +56,5 @@ public class Questiion {
 
     public void setBrowseNum(Integer browseNum) {
         this.browseNum = browseNum;
-    }
-
-    public Integer getCommentNum() {
-        return commentNum;
-    }
-
-    public void setCommentNum(Integer commentNum) {
-        this.commentNum = commentNum;
     }
 }

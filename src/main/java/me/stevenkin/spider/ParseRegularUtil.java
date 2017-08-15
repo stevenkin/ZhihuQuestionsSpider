@@ -38,6 +38,10 @@ public class ParseRegularUtil {
         String json = page.getContent();
         JSONObject object = JSON.parseObject(json);
         JSONArray array = object.getJSONArray("msg");
+        if(array.size()==0) {
+            result.setSkip(true);
+            return;
+        }
         for (int i = 0; i < array.size(); i++) {
             String topicStr = array.getString(i);
             Document doc = Jsoup.parseBodyFragment(topicStr);
@@ -71,23 +75,40 @@ public class ParseRegularUtil {
         result.addRequest(request);
     }
 
-    public static void parseZhihuTopicNewest_post(Page page,Result result){
+    public static void parseZhihuTopicNewest_post(Page page,Result result) {
         String json = page.getContent();
         JSONObject object = JSON.parseObject(json);
+        if(object.getJSONArray("msg").getInteger(0)==0){
+            result.setSkip(true);
+            return ;
+        }
         String content = object.getJSONArray("msg").getString(1);
         Document doc = Jsoup.parseBodyFragment(content);
         Elements divs = doc.body().select("div.feed-item.feed-item-hook.folding");
         List<QuestionLink> linkList = new ArrayList<>();
-        for(Element element:divs){
-            QuestionLink link = new QuestionLink("https://www.zhihu.com"+element.select("a.question_link").first().attr("href"),element.attr("data-score"));
+        for (Element element : divs) {
+            QuestionLink link = new QuestionLink("https://www.zhihu.com" + element.select("a.question_link").first().attr("href"), element.attr("data-score"));
             linkList.add(link);
         }
-        for(QuestionLink link:linkList){
-            result.addRequest(new Request(link.getLink(),null));
+        for (QuestionLink link : linkList) {
+            result.addRequest(new Request(link.getLink(), null));
         }
-        Request request = new Request(page.getRequest().getUrl(),HttpMethod.POST).addParame("start","0").addParame("offset",linkList.get(linkList.size()-1).getDataScore());
+        Request request = new Request(page.getRequest().getUrl(), HttpMethod.POST).addParame("start", "0").addParame("offset", linkList.get(linkList.size() - 1).getDataScore());
         result.addRequest(request);
     }
 
-
+    public static void parseZhihuQuestion(Page page, Result result){
+        String html  = page.getContent();
+        Document doc = Jsoup.parse(html);
+        Question question = new Question();
+        question.setQuestionName(doc.body().select("h1.QuestionHeader-title").first().text());
+        question.setQuestionUrl(page.getRequest().getUrl());
+        question.setFollowers(Integer.parseInt(doc.body().select("button.Button.NumberBoard-item.Button--plain").first().select("div.NumberBoard-value").first().text()));
+        question.setBrowseNum(Integer.parseInt(doc.body().select("div.NumberBoard-item").first().select("div.NumberBoard-value").first().text()));
+        Elements elements = doc.body().select("div.Tag.QuestionTopic");
+        for(Element element:elements){
+            question.addTopicLink(new TopicLink(element.select("#null-toggle").first().text(),element.select("a.TopicLink").first().attr("href")));
+        }
+        result.putData("data",question);
+    }
 }
