@@ -57,4 +57,15 @@ public class Question {
     public void setBrowseNum(Integer browseNum) {
         this.browseNum = browseNum;
     }
+
+    @Override
+    public String toString() {
+        return "Question{" +
+                "questionName='" + questionName + '\'' +
+                ", questionUrl='" + questionUrl + '\'' +
+                ", topicLinks=" + topicLinks +
+                ", followers=" + followers +
+                ", browseNum=" + browseNum +
+                '}';
+    }
 }

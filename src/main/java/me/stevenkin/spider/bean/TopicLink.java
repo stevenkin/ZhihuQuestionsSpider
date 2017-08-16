@@ -27,4 +27,12 @@ public class TopicLink {
     public void setTopicUrl(String topicUrl) {
         this.topicUrl = topicUrl;
     }
+
+    @Override
+    public String toString() {
+        return "TopicLink{" +
+                "topicName='" + topicName + '\'' +
+                ", topicUrl='" + topicUrl + '\'' +
+                '}';
+    }
 }

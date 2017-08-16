@@ -31,20 +31,4 @@ public class PageParser {
         }
         return result;
     }
-
-    public static void main(String[] args) throws Exception {
-        Downloader downloader = new Downloader();
-        PageParser pageParser = new PageParser();
-        Request request = new Request("https://www.zhihu.com/node/TopicsPlazzaListV2", HttpMethod.POST);
-        JSONObject object = new JSONObject();
-        object.put("topic_id", 253);
-        object.put("offset", 20);
-        object.put("hash_id", "22e50cd21ed9df7085ff76d62175e986");
-        request.addParame("method", "next")
-                .addParame("params", object.toJSONString()).addAttach("topic_id",253).addAttach("offset",20);
-        Page page = downloader.download(request);
-        System.out.println("page is "+page);
-        Result result = pageParser.parsePage(page);
-        System.out.println("result is "+result);
-    }
 }

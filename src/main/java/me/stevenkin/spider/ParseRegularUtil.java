@@ -51,11 +51,11 @@ public class ParseRegularUtil {
         }
         Request request = new Request("https://www.zhihu.com/node/TopicsPlazzaListV2", HttpMethod.POST);
         JSONObject object1 = new JSONObject();
-        object.put("topic_id", page.getRequest().getAddch("topic_id"));
-        object.put("offset", Integer.valueOf(((Integer) page.getRequest().getAddch("offset")) + 20));
-        object.put("hash_id", "22e50cd21ed9df7085ff76d62175e986");
+        object1.put("topic_id", page.getRequest().getAddch("topic_id"));
+        object1.put("offset", Integer.valueOf(((Integer) page.getRequest().getAddch("offset")) + 20));
+        object1.put("hash_id", "22e50cd21ed9df7085ff76d62175e986");
         request.addParame("method", "next")
-                .addParame("params", object.toJSONString()).addAttach("offset", Integer.valueOf(((Integer) page.getRequest().getAddch("offset")) + 20)).addAttach("topic_id", page.getRequest().getAddch("topic_id"));
+                .addParame("params", object1.toJSONString()).addAttach("offset", Integer.valueOf(((Integer) page.getRequest().getAddch("offset")) + 20)).addAttach("topic_id", page.getRequest().getAddch("topic_id"));
         result.addRequest(request);
     }
 

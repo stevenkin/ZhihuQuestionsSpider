@@ -12,6 +12,7 @@ public class Result {
     private List<Request> requests;
     private Map<String,Object> result;
     private boolean isSkip;
+    private Page page;
 
     public Result(){
         this.requests = new ArrayList<>();
@@ -31,6 +32,11 @@ public class Result {
 
     public boolean isSkip(){
         return this.isSkip;
+    }
+
+    public Result setPage(Page page){
+        this.page = page;
+        return this;
     }
 
     public void setSkip(boolean isSkip){

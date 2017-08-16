@@ -1,6 +1,7 @@
 package me.stevenkin.spider;
 
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.*;
 
 /**
@@ -17,7 +18,7 @@ public class Spider implements Runnable {
     private int threadNum;
 
     public Spider(){
-        this.requests = new ArrayBlockingQueue<Request>(100);
+        this.requests = new LinkedBlockingQueue<>();
     }
 
     public Spider downloader(Downloader downloader){
@@ -47,20 +48,27 @@ public class Spider implements Runnable {
             try {
                 Request request = requests.take();
                 Page page = downloader.download(request);
-                System.out.println("page is "+page);
+                //System.out.println("page is "+page);
                 Result result = pageParser.parsePage(page);
+                System.out.println("result is "+result);
+                result.setPage(page);
                 if(!result.isSkip()){
                     List<Request> requestList = result.getRequests();
                     if(requestList!=null&&!requestList.isEmpty()){
                         for(Request request1:requestList){
-                            System.out.println("request is "+request1);
                             this.requests.put(request1);
                         }
                     }
                 }
+                System.out.println("requests size is "+this.requests.size());
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } catch (Exception e) {
+                e.printStackTrace();
+            }
+            try {
+                Thread.sleep(1000+ new Random().nextInt(500));
+            } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
@@ -82,7 +90,7 @@ public class Spider implements Runnable {
         spider.downloader(new Downloader())
                 .pageParser(new PageParser())
                 .storer(new Storer())
-                .thread(1);
+                .thread(3);
         spider.start(new Request("https://www.zhihu.com/topics",null));
         spider.go();
 
