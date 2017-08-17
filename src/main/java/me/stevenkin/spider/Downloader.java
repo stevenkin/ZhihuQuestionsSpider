@@ -77,7 +77,7 @@ public class Downloader {
         }else{
 
         }
-        RequestConfig requestConfig = RequestConfig.custom().setSocketTimeout(2000).setConnectTimeout(2000).build();
+        RequestConfig requestConfig = RequestConfig.custom().setSocketTimeout(10000).setConnectTimeout(10000).build();
         httpUriRequest.setConfig(requestConfig);
         httpUriRequest.setHeader(new BasicHeader("Accept","*/*"));
         httpUriRequest.setHeader(new BasicHeader("Accept-Encoding","gzip, deflate, sdch, br"));

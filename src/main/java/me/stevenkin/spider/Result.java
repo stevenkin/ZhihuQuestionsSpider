@@ -39,6 +39,10 @@ public class Result {
         return this;
     }
 
+    public Page getPage() {
+        return page;
+    }
+
     public void setSkip(boolean isSkip){
         this.isSkip = isSkip;
     }

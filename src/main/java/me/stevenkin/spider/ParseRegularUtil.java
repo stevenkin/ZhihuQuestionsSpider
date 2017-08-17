@@ -103,8 +103,8 @@ public class ParseRegularUtil {
         Question question = new Question();
         question.setQuestionName(doc.body().select("h1.QuestionHeader-title").first().text());
         question.setQuestionUrl(page.getRequest().getUrl());
-        question.setFollowers(Integer.parseInt(doc.body().select("button.Button.NumberBoard-item.Button--plain").first().select("div.NumberBoard-value").first().text()));
-        question.setBrowseNum(Integer.parseInt(doc.body().select("div.NumberBoard-item").first().select("div.NumberBoard-value").first().text()));
+        question.setFollowers(Integer.parseInt(doc.body().select("div.NumberBoard.QuestionFollowStatus-counts").first().select("div.NumberBoard-value").first().text()));
+        question.setBrowseNum(Integer.parseInt(doc.body().select("div.NumberBoard.QuestionFollowStatus-counts div.NumberBoard-item div.NumberBoard-value").get(1).text()));
         Elements elements = doc.body().select("div.Tag.QuestionTopic");
         for(Element element:elements){
             question.addTopicLink(new TopicLink(element.select("#null-toggle").first().text(),element.select("a.TopicLink").first().attr("href")));
