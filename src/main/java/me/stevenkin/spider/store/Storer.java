@@ -1,6 +1,8 @@
-package me.stevenkin.spider;
+package me.stevenkin.spider.store;
 
 import me.stevenkin.spider.bean.Question;
+import me.stevenkin.spider.parser.Result;
+import me.stevenkin.spider.store.DBUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -23,6 +25,8 @@ public class Storer {
                 statement.setInt(3,question.getFollowers());
                 statement.setInt(4,question.getBrowseNum());
                 statement.executeUpdate();
+                statement.close();;
+                connection.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }

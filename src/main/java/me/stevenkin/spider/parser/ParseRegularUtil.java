@@ -1,9 +1,13 @@
-package me.stevenkin.spider;
+package me.stevenkin.spider.parser;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import me.stevenkin.spider.bean.*;
+import me.stevenkin.spider.download.HttpMethod;
+import me.stevenkin.spider.download.Page;
+import me.stevenkin.spider.download.Request;
+import me.stevenkin.spider.parser.Result;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -103,8 +107,8 @@ public class ParseRegularUtil {
         Question question = new Question();
         question.setQuestionName(doc.body().select("h1.QuestionHeader-title").first().text());
         question.setQuestionUrl(page.getRequest().getUrl());
-        question.setFollowers(Integer.parseInt(doc.body().select("div.NumberBoard.QuestionFollowStatus-counts").first().select("div.NumberBoard-value").first().text()));
-        question.setBrowseNum(Integer.parseInt(doc.body().select("div.NumberBoard.QuestionFollowStatus-counts div.NumberBoard-item div.NumberBoard-value").get(1).text()));
+        question.setFollowers(Integer.parseInt(doc.body().select("div.NumberBoard-value").get(0).text()));
+        question.setBrowseNum(Integer.parseInt(doc.body().select("div.NumberBoard-value").get(1).text()));
         Elements elements = doc.body().select("div.Tag.QuestionTopic");
         for(Element element:elements){
             question.addTopicLink(new TopicLink(element.select("#null-toggle").first().text(),element.select("a.TopicLink").first().attr("href")));

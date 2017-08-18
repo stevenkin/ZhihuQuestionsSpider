@@ -1,4 +1,7 @@
-package me.stevenkin.spider;
+package me.stevenkin.spider.parser;
+
+import me.stevenkin.spider.download.Page;
+import me.stevenkin.spider.download.Request;
 
 import java.util.ArrayList;
 import java.util.HashMap;

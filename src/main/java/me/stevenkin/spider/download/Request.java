@@ -1,4 +1,4 @@
-package me.stevenkin.spider;
+package me.stevenkin.spider.download;
 
 import java.util.HashMap;
 import java.util.Map;

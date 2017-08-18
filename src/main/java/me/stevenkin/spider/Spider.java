@@ -1,5 +1,12 @@
 package me.stevenkin.spider;
 
+import me.stevenkin.spider.download.Downloader;
+import me.stevenkin.spider.download.Page;
+import me.stevenkin.spider.download.Request;
+import me.stevenkin.spider.parser.PageParser;
+import me.stevenkin.spider.parser.Result;
+import me.stevenkin.spider.store.Storer;
+
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.*;
@@ -86,7 +93,7 @@ public class Spider implements Runnable {
         spider.downloader(new Downloader())
                 .pageParser(new PageParser())
                 .storer(new Storer())
-                .thread(3);
+                .thread(10);
         spider.start(new Request("https://www.zhihu.com/topics",null));
         spider.go();
 

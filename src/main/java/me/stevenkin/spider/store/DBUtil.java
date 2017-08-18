@@ -1,4 +1,4 @@
-package me.stevenkin.spider;
+package me.stevenkin.spider.store;
 
 import java.io.IOException;
 import java.sql.Connection;

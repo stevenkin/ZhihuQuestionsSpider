@@ -1,6 +1,10 @@
-package me.stevenkin.spider;
+package me.stevenkin.spider.parser;
 
-import com.alibaba.fastjson.JSONObject;
+import me.stevenkin.spider.store.Storer;
+import me.stevenkin.spider.download.Downloader;
+import me.stevenkin.spider.download.HttpMethod;
+import me.stevenkin.spider.download.Page;
+import me.stevenkin.spider.download.Request;
 
 import java.util.regex.Pattern;
 

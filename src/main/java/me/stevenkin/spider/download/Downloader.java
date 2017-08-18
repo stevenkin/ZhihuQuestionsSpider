@@ -1,4 +1,4 @@
-package me.stevenkin.spider;
+package me.stevenkin.spider.download;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -83,11 +83,12 @@ public class Downloader {
         httpUriRequest.setHeader(new BasicHeader("Accept-Encoding","gzip, deflate, sdch, br"));
         httpUriRequest.setHeader(new BasicHeader("Accept-Language","zh-CN,zh;q=0.8"));
         httpUriRequest.setHeader(new BasicHeader("Connection","keep-alive"));
-        //httpUriRequest.setHeader(new BasicHeader("Cookie","_zap=e6e96f06-0d2f-4f0d-ac05-2d8eb330f447; d_c0=\"AGDC7306qQuPTt0pgZbkERrYRQ1hVCI8fOI=|1493115292\"; _zap=f748032f-fab9-4d2d-9994-71d44c39263d; q_c1=e1ef3c5c4adc45b5bc7733bfafd8b44b|1500793278000|1492701919000; r_cap_id=\"OTFkMzdjMDI1Nzk1NGYyNWIwZjA1NmY5NzNiY2FjNWY=|1501301653|03ab423ce206e0e9e29d42746f8b142512a5b896\"; cap_id=\"M2NlY2RjYTk3NDZkNGQ4ZmJkNGNhZWJjMDA1ZmQ0ODg=|1501301653|133ed81880e9d14054ed848600440f1fec6ba948\"; z_c0=Mi4wQUFDQVRkTWlBQUFBWU1MdmZUcXBDeGNBQUFCaEFsVk5uWmlqV1FBaHRqNXd2bzJxOVJla1lrcDM1clJ1ZkJtUXZn|1501301661|d9438d3a138aa430b58fcf7c0f8470e7cd4c4d6a; aliyungf_tc=AQAAALoYhixcfAEAJoYccPNbipCnOtyC; __utma=51854390.1795365289.1501808834.1502789847.1502846608.12; __utmb=51854390.0.10.1502846608; __utmc=51854390; __utmz=51854390.1502846608.12.10.utmcsr=zhihu.com|utmccn=(referral)|utmcmd=referral|utmcct=/; __utmv=51854390.100-1|2=registration_date=20131223=1^3=entry_date=20131223=1; _xsrf=6f1a46d6-c385-42b6-b303-7c0ba6bebb71"));
+        httpUriRequest.setHeader(new BasicHeader("Cookie","_zap=e6e96f06-0d2f-4f0d-ac05-2d8eb330f447; d_c0=\"AGDC7306qQuPTt0pgZbkERrYRQ1hVCI8fOI=|1493115292\"; _zap=f748032f-fab9-4d2d-9994-71d44c39263d; q_c1=e1ef3c5c4adc45b5bc7733bfafd8b44b|1500793278000|1492701919000; r_cap_id=\"OTFkMzdjMDI1Nzk1NGYyNWIwZjA1NmY5NzNiY2FjNWY=|1501301653|03ab423ce206e0e9e29d42746f8b142512a5b896\"; cap_id=\"M2NlY2RjYTk3NDZkNGQ4ZmJkNGNhZWJjMDA1ZmQ0ODg=|1501301653|133ed81880e9d14054ed848600440f1fec6ba948\"; z_c0=Mi4wQUFDQVRkTWlBQUFBWU1MdmZUcXBDeGNBQUFCaEFsVk5uWmlqV1FBaHRqNXd2bzJxOVJla1lrcDM1clJ1ZkJtUXZn|1501301661|d9438d3a138aa430b58fcf7c0f8470e7cd4c4d6a; aliyungf_tc=AQAAALoYhixcfAEAJoYccPNbipCnOtyC; __utma=51854390.1795365289.1501808834.1502789847.1502846608.12; __utmb=51854390.0.10.1502846608; __utmc=51854390; __utmz=51854390.1502846608.12.10.utmcsr=zhihu.com|utmccn=(referral)|utmcmd=referral|utmcct=/; __utmv=51854390.100-1|2=registration_date=20131223=1^3=entry_date=20131223=1; _xsrf=fd902000-24e7-4244-b275-741f2c80e661"));
         httpUriRequest.setHeader(new BasicHeader("Host","www.zhihu.com"));
         httpUriRequest.setHeader(new BasicHeader("Referer","https://www.zhihu.com/topics"));
         httpUriRequest.setHeader(new BasicHeader("User-Agent","Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36"));
         httpUriRequest.setHeader(new BasicHeader("X-Requested-With","XMLHttpRequest"));
+        httpUriRequest.setHeader(new BasicHeader("X-Xsrftoken","fd902000-24e7-4244-b275-741f2c80e661"));
         HttpResponse response = httpClient.execute(httpUriRequest);
         content = EntityUtils.toString(response.getEntity(),Charset.forName("UTF-8"));
         return new Page(request,content);
