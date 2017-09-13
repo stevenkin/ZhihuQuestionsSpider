@@ -1,10 +1,14 @@
 package me.stevenkin.spider.download;
 
+import me.stevenkin.spider.proxy.Proxy;
+import me.stevenkin.spider.proxy.ProxyPool;
 import org.apache.http.HttpEntity;
+import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpRequestBase;
@@ -39,6 +43,8 @@ import java.util.Map;
  */
 public class Downloader {
     private CloseableHttpClient httpClient;
+
+    private ProxyPool proxyPool;
 
     public Downloader(){
         PoolingHttpClientConnectionManager cm = new PoolingHttpClientConnectionManager();
@@ -77,7 +83,8 @@ public class Downloader {
         }else{
 
         }
-        RequestConfig requestConfig = RequestConfig.custom().setSocketTimeout(10000).setConnectTimeout(10000).build();
+        Proxy proxy = this.proxyPool.getProxy();
+        RequestConfig requestConfig = RequestConfig.custom().setProxy(new HttpHost(proxy.getIp(),proxy.getPort())).setSocketTimeout(10000).setConnectTimeout(10000).build();
         httpUriRequest.setConfig(requestConfig);
         httpUriRequest.setHeader(new BasicHeader("Accept","*/*"));
         httpUriRequest.setHeader(new BasicHeader("Accept-Encoding","gzip, deflate, sdch, br"));
@@ -90,7 +97,9 @@ public class Downloader {
         httpUriRequest.setHeader(new BasicHeader("X-Requested-With","XMLHttpRequest"));
         httpUriRequest.setHeader(new BasicHeader("X-Xsrftoken","fd902000-24e7-4244-b275-741f2c80e661"));
         HttpResponse response = httpClient.execute(httpUriRequest);
+        this.proxyPool.returnProxy(proxy);
         content = EntityUtils.toString(response.getEntity(),Charset.forName("UTF-8"));
+        ((CloseableHttpResponse)response).close();
         return new Page(request,content);
     }
 
